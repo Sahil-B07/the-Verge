@@ -1,5 +1,5 @@
 import sqlite3
-
+import pandas as pd
 
 connect = sqlite3.connect('articles.db')
 cursor = connect.cursor()
@@ -26,9 +26,13 @@ def deleteData(tname):
 def resetIds(no):
     cursor.execute("UPDATE SQLITE_SEQUENCE SET seq= ? WHERE NAME='verge'", (str(no)))
         
-if __name__ == '__main__':
-    # deleteData('verge')
-    # resetIds(0)
+def csvToDb(filename, db):
+    articles = pd.read_csv(filename, usecols=['URL','HEADLINE','AUTHOR','DATE'])
+    articles.to_sql(db, connect, if_exists='append',index=False)
 
+if __name__ == '__main__':
+    deleteData('verge')
+    # resetIds(0)
+    # csvToDb('Data/270323.csv')
     connect.commit()
     cursor.close()
