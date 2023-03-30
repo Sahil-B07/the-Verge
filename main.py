@@ -1,7 +1,7 @@
 import feedparser, os, argparse, time, datetime, logging
 from dotenv import load_dotenv
 import pandas as pd
-import myDb
+import Db
 
 API_KEY = os.getenv('API_KEY')
 SOURCE = "the-verge"
@@ -61,8 +61,8 @@ def fetchData():
                     latest_id = feed.entries[0].id
                     break
 
-            myDb.insertData(url, headline, author, date)
-            myDb.connect.commit()
+            Db.insertData(url, headline, author, date)
+            Db.connect.commit()
 
             data.append([url, headline, author, date])
             print([url, headline, author, date])
@@ -85,12 +85,12 @@ if __name__ == '__main__':
     
     arg = parser.parse_args()
     if arg.c2d:
-        myDb.csvToDb(arg.c2d[0],arg.c2d[1])
+        Db.csvToDb(arg.c2d[0],arg.c2d[1])
         logging.info(f'{arg.c2d[0]} saved in {arg.c2d[1]} database')
     if arg.rtd:
-        myDb.deleteData(arg.rtd[0])
-        myDb.resetIds(0)
+        Db.deleteData(arg.rtd[0])
+        Db.resetIds(0)
     
-    myDb.connect.commit()
+    Db.connect.commit()
     
-    fetchData()
+    # fetchData()
