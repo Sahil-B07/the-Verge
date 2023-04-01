@@ -1,21 +1,36 @@
-import sqlite3
-import pandas as pd
-import mysql.connector
 from sqlalchemy import create_engine
+import mysql.connector
+import sqlite3
 
-connect = sqlite3.connect('articles.db')
-cursor = connect.cursor()
+from dotenv import load_dotenv
+import configparser, os
+import pandas as pd
 
+load_dotenv()
+
+config = configparser.ConfigParser()
+config.read('src/config/database.ini')
+
+host = config['mysql']['host']
+database_name = config['mysql']['database_name']
+user = config['mysql']['user']
+password = os.getenv('DB_PASSWORD')
+port = config['mysql']['port']
+
+
+connect = sqlite3.connect('./Data/articles.db')
 mydb = mysql.connector.connect(
-  host="165.22.216.82",
-  user="resahil",
-  password="Object@23",
-  database="theVerge",
-  port='3306'
+  host=host,
+  user=user,
+  password=password,
+  database=database_name,
+  port=port
 )
+
+cursor = connect.cursor()
 mycursor = mydb.cursor()
 
-engine = create_engine('mysql+pymysql://root:Object@23@165.22.216.82:3306/theVerge')
+engine = create_engine(f'mysql+pymysql://{user}:{password}23@{host}/{database_name}')
 
 # creating a table
 def createTable():
@@ -49,12 +64,8 @@ def csvToDb(filename, db):
     articles.to_sql(name=db, con=engine, if_exists='append',index=False)
 
 if __name__ == '__main__':
-    # deleteData('verge')
-    # resetIds(0)
-
-    createTable()
-    # insertData('hhtp://google.com', 'This is a demo healdine', 'Mr. Kumar', '23-05-2002')
+    print()
     # connect.commit()
-    mydb.commit()
-    mydb.close()
-    cursor.close()
+    # mydb.commit()
+    # mydb.close()
+    # cursor.close()
