@@ -51,9 +51,9 @@ class Verge():
                         latest_id = feed.entries[0].id
                         break
 
-                # Db.insertData(url, headline, author, date)
-                # Db.connect.commit()
-                # Db.mydb.commit()
+                Db.insertData(url, headline, author, date)
+                Db.connect.commit()
+                Db.mydb.commit()
 
                 data.append([url, headline, author, date])
                 print([url, headline, author, date])
