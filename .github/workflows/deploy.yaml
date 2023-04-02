@@ -21,4 +21,4 @@ jobs:
         script: |
           cd /home/sahilr/the-Verge/
           git pull
-          sudo -S systemctl restart verge.service < ${{ REMOTE_PASSWORD }}
+          sudo -S systemctl restart verge.service < ${{ secrets.REMOTE_PASSWORD }}
