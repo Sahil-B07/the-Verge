@@ -51,12 +51,12 @@ def dropTable(tname):
 
 # delete data
 def deleteData(tname):
-    cursor.execute(f'''DELETE FROM {tname}''')
-    mycursor.execute(f'''DELETE FROM {tname}''')
+    cursor.execute(f'''DELETE FROM {tname} where id > 60''')
+    mycursor.execute(f'''DELETE FROM {tname} where id > 60''')
 
 # reset id's
 def resetIds(no):
-    cursor.execute("UPDATE SQLITE_SEQUENCE SET seq= ? WHERE NAME='verge'", (str(no)))
+    cursor.execute("UPDATE SQLITE_SEQUENCE SET seq= ? WHERE NAME='verge'", (str(no),))
     mycursor.execute("ALTER TABLE verge AUTO_INCREMENT = %s", (no,))
         
 def csvToDb(filename, db):
@@ -66,7 +66,7 @@ def csvToDb(filename, db):
 
 if __name__ == '__main__':
     # deleteData('verge')
-    # resetIds(0)
+    # resetIds(60)
 
 
     connect.commit()
