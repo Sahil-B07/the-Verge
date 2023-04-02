@@ -54,6 +54,7 @@ class Verge():
 
                 articleDate = '/home/sahilr/the-Verge/Data/'+date.strftime("%d%m%y")+'.csv'
                 if articleDate != fileName:
+                    latest_id = feed.entries[0].id
                     break
                 data.append([url, headline, author, date])
                 dcount+=1
