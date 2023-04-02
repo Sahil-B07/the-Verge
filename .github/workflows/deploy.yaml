@@ -17,6 +17,7 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.REMOTE_KEY }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
         source: '.'
         target: '/home/sahilr'
     - name: Restart systemd service
