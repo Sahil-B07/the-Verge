@@ -4,11 +4,12 @@ on:
   push:
     branches:
       - main
-env:
-    REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,4 +23,4 @@ jobs:
           script: |
             cd /home/sahilr/the-Verge/
             git pull
-            echo $REMOTE_PASSWORD | sudo -S systemctl restart verge.service
+            echo ${{ env.REMOTE_PASSWORD }} | sudo -S systemctl restart verge.service
