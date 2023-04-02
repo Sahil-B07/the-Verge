@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-
+env:
+    REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,9 +19,6 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_KEY }}
           port: 22
-          env:
-            REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
-            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           script: |
             cd /home/sahilr/the-Verge/
             git pull
