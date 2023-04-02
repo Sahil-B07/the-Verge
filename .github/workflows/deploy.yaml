@@ -18,7 +18,9 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.REMOTE_KEY }}
         port: 22
+        env:
+          REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
         script: |
           cd /home/sahilr/the-Verge/
           git pull
-          sudo -S systemctl restart /etc/systemd/system/verge.service < ${{ secrets.REMOTE_PASSWORD }}
+          echo $REMOTE_PASSWORD | sudo -S systemctl restart verge.service
