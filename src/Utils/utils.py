@@ -1,26 +1,12 @@
 import sys
-sys.path.append('src')
+sys.path.append('/home/sahilr/the-Verge/src')
 
 import scripts.database as Db
 import config.logger as logger
 import pandas as pd
-import argparse
-
-parser = argparse.ArgumentParser()
-parser.add_argument('-c2d', nargs='+',type=str, help='store Csv To Database')
-parser.add_argument('-rtd',type=str ,nargs='+' ,help='Remove Table\'s Data')
-
-arg = parser.parse_args()
 
 class Operations():
     
-    def c2d(arg):
-        Db.csvToDb(arg.c2d[0],arg.c2d[1])
-        logger.info(f'{arg.c2d[0]} saved in {arg.c2d[1]} table:theVerge-DB')
-    def rtd(arg):
-        Db.deleteData(arg.rtd[0])
-        Db.resetIds(0)
-
     def get_csv(head,details,fname):
         df = pd.DataFrame(details,columns=head).rename_axis('ID', axis=1)
 
