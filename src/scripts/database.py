@@ -65,8 +65,8 @@ def csvToDb(filename, db):
     articles.to_sql(name=db, con=engine, if_exists='append',index=False)
 
 if __name__ == '__main__':
-    # deleteData('verge')
-    # resetIds(60)
+    deleteData('verge')
+    resetIds(60)
 
 
     connect.commit()

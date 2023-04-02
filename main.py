@@ -32,7 +32,7 @@ class Verge():
 
             if (feed.entries[0].id == latest_id and pd.notna(pd.read_csv(fileName)['URL'].max())):
                     logger.info("Looking for new Feeds...!")
-                    time.sleep(300)
+                    time.sleep(3600)
                     continue
             
             for i in feed.entries:
