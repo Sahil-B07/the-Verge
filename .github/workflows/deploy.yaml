@@ -18,7 +18,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.REMOTE_KEY }}
         source: '.'
-        target: '/home/sahilr/the-Verge'
+        target: '/home/sahilr'
     - name: Restart systemd service
       run: |
         ssh -i ${{ secrets.REMOTE_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'systemctl restart verge.service'
