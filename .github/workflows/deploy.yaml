@@ -18,8 +18,8 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.REMOTE_KEY }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        source: '.'
-        target: '/home/sahilr'
-    - name: Restart systemd service
-      run: |
-        ssh -i ${{ secrets.REMOTE_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'systemctl restart verge.service'
+        port: 22
+        script: |
+          cd /home/sahilr/the-Verge/
+          git pull
+          sudo systemctl restart verge.service
